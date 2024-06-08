@@ -1,0 +1,36 @@
+name: show-me-the-money
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - XERO_API_URL=http://mock-xero-api:3000/api.xro/2.0/Reports/BalanceSheet
+    depends_on:
+      - mock-xero-api
+    networks:
+      - show-me-the-money-network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3003:3000"
+    environment:
+      - VITE_API_URL=http://backend:3001/api/balance-sheet
+    depends_on:
+      - backend
+    networks:
+      - show-me-the-money-network
+
+  mock-xero-api:
+    image: jaypeng2015/show-me-the-money
+    platform: linux/arm64/v8
+    ports:
+      - "3000:3000"
+    networks:
+      - show-me-the-money-network
+
+networks:
+  show-me-the-money-network:

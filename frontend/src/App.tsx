@@ -10,7 +10,7 @@ const App: FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<BalanceSheetResponse>('/api/balance-sheet');
+        const response = await axios.get<BalanceSheetResponse>(import.meta.env.VITE_API_URL || '/api/balance-sheet');
         setData(response?.data?.Reports?.[0]?.Rows || []);
       } catch (e) {
         setError('Failed to fetch balance sheet data');
