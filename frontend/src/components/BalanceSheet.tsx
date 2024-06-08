@@ -10,7 +10,7 @@ const BalanceSheet: FC<BalanceSheetProps> = ({ rows }) => {
       if (row.RowType === 'Header' || row.RowType === 'SummaryRow') {
         return (
           <tr key={index}>
-            {row.Cells?.map((cell, cellIndex) => (
+            {row.Cells?.map((cell: CellsEntity, cellIndex: number) => (
               <th key={cellIndex}>{cell.Value}</th>
             ))}
           </tr>
@@ -19,20 +19,19 @@ const BalanceSheet: FC<BalanceSheetProps> = ({ rows }) => {
       if (row.RowType === 'Row') {
         return (
           <tr key={index}>
-            {row.Cells?.map((cell, cellIndex) => (
+            {row.Cells?.map((cell: CellsEntity, cellIndex: number) => (
               <td key={cellIndex}>{cell.Value}</td>
             ))}
           </tr>
         );
       }
       if (row.RowType === 'Section') {
-        console.log('section ---', row);
         return (
           <Fragment key={index}>
             <tr>
               <td colSpan={3}><strong>{row.Title}</strong></td>
             </tr>
-            {renderRows(row.Rows || [])}
+            {row.Rows && renderRows(row.Rows)}
           </Fragment>
         );
       }
@@ -43,7 +42,7 @@ const BalanceSheet: FC<BalanceSheetProps> = ({ rows }) => {
   return (
     <table border={1}>
       <thead>
-        {renderRows([rows[0]])}
+        {rows.length > 0 && renderRows([rows[0]])}
       </thead>
       <tbody>
         {renderRows(rows.slice(1))}
