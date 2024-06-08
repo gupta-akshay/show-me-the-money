@@ -63,6 +63,16 @@ docker pull jaypeng2015/show-me-the-money
 docker run -d -p 3000:3000 jaypeng2015/show-me-the-money
 ```
 
+### Step 4: Run Tests
+
+```bash
+cd backend
+yarn test
+
+cd ../frontend
+yarn test
+```
+
 ### Step 4: Start the Backend Server
 
 In the `backend` directory, start the backend server:
