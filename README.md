@@ -90,3 +90,5 @@ yarn dev
 ```
 
 The frontend application will be running at http://localhost:3000
+
+> NOTE - As per the documentation at https://developer.xero.com/documentation/api/accounting/reports#balance-sheet, there are multiple optional parameters for the API. But none of these seemed to have any effect on the provided Mock API. Thus I have not included those in the code.
