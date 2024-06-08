@@ -2,7 +2,10 @@ name: show-me-the-money
 
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      args:
+        XERO_API_URL: http://mock-xero-api:3000/api.xro/2.0/Reports/BalanceSheet
     ports:
       - "3001:3001"
     environment:
@@ -14,11 +17,14 @@ services:
       - show-me-the-money-network
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:3001/api/balance-sheet
     ports:
       - "3003:3000"
     environment:
-      - VITE_API_URL=http://backend:3001/api/balance-sheet
+      - VITE_API_URL=http://localhost:3001/api/balance-sheet
     depends_on:
       - backend
     networks:
@@ -34,3 +40,4 @@ services:
 
 networks:
   show-me-the-money-network:
+
